@@ -6,6 +6,8 @@ import com.company.request.CompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CompanyServiceImpl implements CompanyService{
 
@@ -19,5 +21,12 @@ public class CompanyServiceImpl implements CompanyService{
     company.setCompanySector(companyRequest.getCompanySector());
 
     companyRepository.save(company);
+    }
+
+    @Override
+    public Company getCompany(Integer id) {
+        Optional<Company> byId = companyRepository.findById(id);
+       return byId.orElse(null);
+
     }
 }
