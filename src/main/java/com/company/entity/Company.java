@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Company {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer companyId;
-    private String companyName;
-    private String companySector;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer companyId;
+        private String companyName;
+        private String companySector;
 
 }

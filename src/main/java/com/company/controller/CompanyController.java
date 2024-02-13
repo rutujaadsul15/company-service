@@ -17,9 +17,9 @@ public class CompanyController {
      companyService.saveCompany(companyRequest);
     }
 
-    @GetMapping("/getCompany/{id}")
-    public Company getCompanyByPathVariable(@PathVariable Integer id){
-          return companyService.getCompany(id);
+    @GetMapping("/getCompany/{companyName}")
+    public Company getCompanyByPathVariable(@PathVariable String companyName){
+          return companyService.getCompany(companyName);
     }
 
     @GetMapping("/getCompany")

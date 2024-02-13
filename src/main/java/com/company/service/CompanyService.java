@@ -7,4 +7,6 @@ public interface CompanyService {
     void saveCompany(CompanyRequest companyRequest);
 
     Company getCompany(Integer id);
+
+    Company getCompany(String companyName);
 }
