@@ -4,7 +4,12 @@ import com.company.entity.Company;
 import com.company.request.CompanyRequest;
 import com.company.service.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/company")
@@ -25,6 +30,18 @@ public class CompanyController {
     @GetMapping("/getCompany")
     public Company getCompanyByRequestParam(@RequestParam("id") Integer id){
             return  companyService.getCompany(id);
+    }
+
+    @PatchMapping("/updateCompnay/{id}")
+    public ResponseEntity<?> updateCompnay(@RequestBody Map<String,Object> patchData, @PathVariable Integer id ){
+         try {
+             Company updateCompnay = companyService.updateCompnay(patchData,id);
+             return ResponseEntity.ok(updateCompnay);
+         }catch (NoSuchElementException e){
+             return ResponseEntity.notFound().build();
+         }catch (Exception e){
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while updating the company");
+         }
     }
 
 }
