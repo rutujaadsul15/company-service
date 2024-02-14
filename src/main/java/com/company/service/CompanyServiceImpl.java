@@ -4,8 +4,11 @@ import com.company.entity.Company;
 import com.company.repository.CompanyRepository;
 import com.company.request.CompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,18 @@ public class CompanyServiceImpl implements CompanyService {
                 .findFirst()
                 .orElse(null);
 
+    }
+
+    @Override
+    public Company updateCompnay(Map<String,Object> patchData, Integer id) {
+        Company company = companyRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        if(patchData.containsKey("companyName")){
+            company.setCompanyName((String)patchData.get("companyName"));
+        }
+        if(patchData.containsKey("companySector")){
+            company.setCompanySector((String)patchData.get("companySector"));
+        }
+        return companyRepository.save(company);
     }
 
     @Override
