@@ -17,31 +17,27 @@ public class CompanyController {
 
     @Autowired
     private CompanyServiceImpl companyService;
-        @PostMapping("/saveCompany")
-    public void saveCompany(@RequestBody CompanyRequest companyRequest){
-     companyService.saveCompany(companyRequest);
+
+    @PostMapping("/saveCompany")
+    public void saveCompany(@RequestBody CompanyRequest companyRequest) {
+        companyService.saveCompany(companyRequest);
     }
 
     @GetMapping("/getCompany/{companyName}")
-    public Company getCompanyByPathVariable(@PathVariable String companyName){
-          return companyService.getCompany(companyName);
+    public Company getCompanyByPathVariable(@PathVariable String companyName) {
+        return companyService.getCompany(companyName);
     }
 
     @GetMapping("/getCompany")
-    public Company getCompanyByRequestParam(@RequestParam("id") Integer id){
-            return  companyService.getCompany(id);
+    public Company getCompanyByRequestParam(@RequestParam("id") Integer id) {
+        return companyService.getCompany(id);
     }
 
     @PatchMapping("/updateCompnay/{id}")
-    public ResponseEntity<?> updateCompnay(@RequestBody Map<String,Object> patchData, @PathVariable Integer id ){
-         try {
-             Company updateCompnay = companyService.updateCompnay(patchData,id);
-             return ResponseEntity.ok(updateCompnay);
-         }catch (NoSuchElementException e){
-             return ResponseEntity.notFound().build();
-         }catch (Exception e){
-             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while updating the company");
-         }
+    public ResponseEntity<?> updateCompnay(@RequestBody Map<String, Object> patchData, @PathVariable Integer id) {
+        Company updateCompnay = companyService.updateCompnay(patchData, id);
+        return ResponseEntity.ok(updateCompnay);
+
     }
 
 }
